@@ -202,6 +202,10 @@ a {
     font-weight: bold;
 }
 
+#confirm-password-section {
+    display: none;
+}
+
 .visual-content {
     display: flex;
     flex-direction: column;
@@ -219,6 +223,7 @@ a {
     width: 36vw;
     height: 35vh;
     border-radius: 30px;
+    position: relative;
 }
 
 .visual-text {
@@ -269,7 +274,47 @@ a {
     overflow: hidden;
 }
 
+.earnings {
+    position: absolute;
+    width: 20vw;
+    height: 15vh;
+    background-color: white;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    top: 75%;
+    right: 0;
+}
 
+.earnings section:nth-child(1) {
+    justify-self: flex-start;
+}
+
+#earn {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding-right: 20px;
+}
+
+#earn p:nth-child(1) {
+    font-family: Inter;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: -2%;
+    color: hsla(152, 42%, 19%, 1)
+}
+
+#earn p:nth-child(2) {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: -2%;
+    color: hsla(152, 42%, 19%, 1)
+}
 
 .content {
     display: flex;

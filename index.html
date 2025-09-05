@@ -17,7 +17,10 @@
                     <section id="logo">olara</section>
                 </section>
                 <h2 id="sign-in">Sign in</h2>
-                <section id="sign-up">Don't have an account<a id="sign-up-link" href="#">Create now</a></section>
+                <section id="sign-up">
+                    <span id="signTextMain">Don't have an account ?</span>
+                    <a id="sign-up-link" href="#">Create now</a>
+                </section>
                 <form action="">
                     <section class="mail">
                         <label for="email">Email</label>
@@ -25,8 +28,13 @@
                     </section>
                     <section class="password">
                         <label for="password">Password</label>
-                        <input type="password" placeholder="Password" required visibility="hidden" >
-                        <p id="eye" style="cursor: pointer; border:1px solid cyan; width:fit-content; padding:3px;">Show password</p>
+                        <input type="password" placeholder="Password" required visibility="hidden">
+                        <p id="eye" style="cursor: pointer; color:gray; width:fit-content; padding:3px;">Show password
+                        </p>
+                    </section>
+                    <section class="password" id="confirm-password-section">
+                        <label for="password">Confirm Password</label>
+                        <input type="password" placeholder="Password" required visibility="hidden">
                     </section>
                     <section class="options">
                         <section>
@@ -35,7 +43,7 @@
                         </section>
                         <a href="#">Forgot password?</a>
                     </section>
-                    <button type="submit">Sign in</button>
+                    <button type="submit" id="sign-btn">Sign in</button>
                 </form>
                 <section class="divider">
                     <section class="line"></section>
@@ -69,6 +77,15 @@
                     </section>
                     <section class="visual-img">
                         <img src="img/card.png" alt="card">
+                    </section>
+                    <section class="earnings">
+                        <section>
+                            <img src="img/Icon.png" alt="logo">
+                        </section>
+                        <section id="earn">
+                            <p>Earnings</p>
+                            <p>$350.40</p>
+                        </section>
                     </section>
                 </section>
                 <section class="content">
