@@ -98,6 +98,13 @@ a {
     outline: none;
 }
 
+.mail input:focus,
+.password input:focus {
+    border: 3px solid hsla(152, 92%, 19%, 1);
+    transition: all 0.1s ease-in-out;
+}
+
+
 .options {
     display: flex;
     justify-content: space-around;
@@ -188,7 +195,6 @@ a {
     justify-content: center;
     gap: 10px;
     color: white;
-    border: 3px solid magenta;
 }
 
 .support h3 {
@@ -205,7 +211,6 @@ a {
     height: 80vh;
     width: 40vw;
     padding: 20px;
-    border: 3px solid cyan;
 }
 
 .visual {
@@ -214,26 +219,62 @@ a {
     width: 36vw;
     height: 35vh;
     border-radius: 30px;
-    padding: 5px;
 }
 
 .visual-text {
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     width: 25vw;
     height: 35vh;
-    border: 3px solid purple;
+}
+
+.visual-text h3 {
+    font-weight: 700;
+    font-size: 34px;
+    line-height: 37px;
+    letter-spacing: -2%;
+    vertical-align: middle;
+    color: hsla(152, 92%, 19%, 1)
+}
+
+.visual-text p {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 28px;
+    letter-spacing: -2%;
+    color: hsla(216, 15%, 52%, 1);
+}
+
+.visual-text button {
+    width: 10vw;
+    padding: 10px;
+    background-color: hsla(152, 42%, 19%, 1);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.visual-text button:hover {
+    background-color: hsla(152, 42%, 19%, 0.8);
+    transition: all 0.3s ease-in-out;
 }
 
 .visual-img {
+    padding: 0;
     width: 11vw;
     height: 35vh;
-    border: 3px solid orange;
+    overflow: hidden;
 }
+
+
 
 .content {
     display: flex;
     flex-direction: column;
     width: 32vw;
-    border: 3px solid red;
     color: white;
     gap: 10px;
 }
@@ -260,7 +301,6 @@ a {
 .nav {
     width: 40vw;
     height: 10vh;
-    border: 3px solid yellow;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -274,7 +314,6 @@ a {
     border-radius: 50%;
     margin: 5px;
 }
-
 
 .left,
 .right {
