@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Olara</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
 </head>
 
 <body>
@@ -13,7 +13,7 @@
         <section class="login-container">
             <section class="login">
                 <section class="head">
-                    <img src="img/VS.png" alt="Olara Logo" style="width:40px; height:40px;">
+                    <img src="/img/VS.png" alt="Olara Logo" style="width:40px; height:40px;">
                     <section id="logo">olara</section>
                 </section>
                 <h2 id="sign-in">Sign in</h2>
@@ -21,20 +21,17 @@
                     <span id="signTextMain">Don't have an account ?</span>
                     <a id="sign-up-link" href="#">Create now</a>
                 </section>
-                <form action="">
-                    <section class="mail">
+                <form id="signupForm" action="/login" method="POST">
+                    <section class=" mail">
                         <label for="email">Email</label>
-                        <input type="email" placeholder="Email" required>
+                        <input type="text" id="email" name="email" placeholder="Email" required>
                     </section>
                     <section class="password">
                         <label for="password">Password</label>
-                        <input type="password" placeholder="Password" required visibility="hidden">
+                        <input type="password" id="password" name="password" placeholder="Password" required
+                            visibility="hidden">
                         <p id="eye" style="cursor: pointer; color:gray; width:fit-content; padding:3px;">Show password
                         </p>
-                    </section>
-                    <section class="password" id="confirm-password-section">
-                        <label for="password">Confirm Password</label>
-                        <input type="password" placeholder="Password" required visibility="hidden">
                     </section>
                     <section class="options">
                         <section>
@@ -52,11 +49,11 @@
                 </section>
                 <section class="social">
                     <button class="google">
-                        <img src="img/google.png" alt="Google Logo" style="width:20px; height:20px;">
+                        <img src="/img/google.png" alt="Google Logo" style="width:20px; height:20px;">
                         Continue with Google
                     </button>
                     <button class="facebook">
-                        <img src="img/facebook.webp" alt="Facebook Logo" style="width:20px; height:20px;">
+                        <img src="/img/facebook.webp" alt="Facebook Logo" style="width:20px; height:20px;">
                         Continue with Facebook
                     </button>
                 </section>
@@ -64,7 +61,7 @@
         </section>
         <section class="adversment">
             <section class="support">
-                <img src="img/support.png" alt="Support Icon" style="width:40px; height:40px;">
+                <img src="/img/support.png" alt="Support Icon" style="width:40px; height:40px;">
                 <h3>Support</h3>
             </section>
             <section class="visual-content">
@@ -76,11 +73,11 @@
                         <button>Learn more</button>
                     </section>
                     <section class="visual-img">
-                        <img src="img/card.png" alt="card">
+                        <img src="/img/card.png" alt="card">
                     </section>
                     <section class="earnings">
                         <section>
-                            <img src="img/Icon.png" alt="logo">
+                            <img src="/img/Icon.png" alt="logo">
                         </section>
                         <section id="earn">
                             <p>Earnings</p>
@@ -103,7 +100,8 @@
             </section>
         </section>
     </main>
-    <script src="script.js"></script>
+    <script src="/script.js"></script>
+    <script src="mongo.js"></script>
 </body>
 
 </html>
