@@ -44,7 +44,7 @@ create.addEventListener('click', () => {
 })
 
 document.getElementById("signupForm").addEventListener("submit", async function (e) {
-    e.preventDefault(); // səhifənin dəyişməsinin qarşısını alır
+    e.preventDefault();
 
     const formData = new FormData(this);
     const data = Object.fromEntries(formData.entries());
@@ -57,7 +57,6 @@ document.getElementById("signupForm").addEventListener("submit", async function 
         });
 
         if (res.ok) {
-            // inputları sıfırla
             this.reset();
             alert("User saved to MongoDB!");
         } else {

@@ -4,12 +4,10 @@ const path = require("path");
 
 const app = express();
 
-// Formdan gələn datanı oxumaq üçün
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// MongoDB-yə qoşul
 mongoose.connect("mongodb://127.0.0.1:27017/school")
     .then(() => console.log("✅ MongoDB connected"))
     .catch(err => console.error("❌ DB error:", err));
@@ -21,19 +19,17 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model("solara", userSchema, "solara");
 
-// HTML faylını göstərmək üçün
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "index.html"));
 });
 
-// Formdan gələn datanı DB-yə yazmaq
 app.post("/login", async (req, res) => {
     try {
         const { email, password } = req.body;
 
         const user = new User({
-            mail: email,       // email → name
-            password: password  // password → surname
+            mail: email,       
+            password: password  
         });
 
         await user.save();
