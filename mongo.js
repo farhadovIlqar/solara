@@ -1,16 +1,23 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
+const session = require("express-session");
 
 const app = express();
+
+app.use(session({
+    secret: "secretkey",
+    resave: false,
+    saveUninitialized: true,
+}));
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 mongoose.connect("mongodb://127.0.0.1:27017/school")
-    .then(() => console.log("✅ MongoDB connected"))
-    .catch(err => console.error("❌ DB error:", err));
+    .then(() => console.log("MongoDB connected"))
+    .catch(err => console.error("DB error:", err));
 
 const userSchema = new mongoose.Schema({
     mail: String,
@@ -23,20 +30,41 @@ app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "index.html"));
 });
 
-app.post("/login", async (req, res) => {
+app.post("/signup", async (req, res) => {
     try {
-        const { email, password } = req.body;
+        const { mail, password } = req.body;
 
         const user = new User({
-            mail: email,       
-            password: password  
+            mail: mail,
+            password: password
         });
 
         await user.save();
-        res.json({success: true})
+        res.json({ success: true })
     } catch (err) {
-        res.status(500).send("❌ Error: " + err.message);
+        res.status(500).send("Error: " + err.message);
     }
 });
 
-app.listen(3001, () => console.log("🚀 Server running on http://localhost:3001"));
+app.post("/login", async (req, res) => {
+    const { mail, password } = req.body;
+
+    try {
+        const user = await User.findOne({ mail, password });
+        if (!user) return res.status(400).json({ success: false, message: "Email və ya parol səhvdir" });
+
+        req.session.userEmail = user.mail;
+
+        res.json({ success: true, email: user.mail });
+    } catch (err) {
+        console.error("Login error:", err)
+        res.status(500).json({ success: false, message: err.message });
+    }
+});
+
+app.get("/api/user", (req, res) => {
+    if (!req.session.userEmail) return res.json({ success: false });
+    res.json({ success: true, email: req.session.userEmail });
+});
+
+app.listen(3001, () => console.log("Server running on http://localhost:3001"));

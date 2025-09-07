@@ -24,7 +24,7 @@
                 <form id="signupForm" action="/login" method="POST">
                     <section class=" mail">
                         <label for="email">Email</label>
-                        <input type="text" id="email" name="email" placeholder="Email" required>
+                        <input type="text" id="email" name="mail" placeholder="Email" required>
                     </section>
                     <section class="password">
                         <label for="password">Password</label>
@@ -32,6 +32,11 @@
                             visibility="hidden">
                         <p id="eye" style="cursor: pointer; color:gray; width:fit-content; padding:3px;">Show password
                         </p>
+                    </section>
+                    <section class="password" id="confirm-password-section">
+                        <label for="password">Confirm password</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Password"
+                            visibility="hidden">
                     </section>
                     <section class="options">
                         <section>
@@ -101,7 +106,6 @@
         </section>
     </main>
     <script src="/script.js"></script>
-    <script src="mongo.js"></script>
 </body>
 
 </html>

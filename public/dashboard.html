@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 id="welcome"></h1>
+
+    <script>
+        const welcomeElement = document.getElementById("welcome");
+
+        fetch("/api/user")
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    welcomeElement.textContent = `Welcome ${data.email}`;
+                } else {
+                    welcomeElement.textContent = "Welcome guest";
+                }
+            });
+    </script>
+
+</body>
+
+</html>
