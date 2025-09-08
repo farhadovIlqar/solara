@@ -62,6 +62,8 @@ form.addEventListener("submit", async function (e) {
 
     if (form.action.includes("signup") && passwordInput.value !== confirmPasswordInput.value) {
         alert("Passwords do not match!");
+        passwordInput.value = ""
+        confirmPasswordInput.value = ""
         return;
     }
 
@@ -84,10 +86,11 @@ form.addEventListener("submit", async function (e) {
                 window.location.href = "/dashboard.html";
             }
         } else {
-            alert(result.message || "Xəta baş verdi");
+            alert(result.message || "Error");
+            this.reset()
         }
     } catch (err) {
         console.error(err);
-        alert("Serverə qoşulmaq mümkün olmadı")
+        alert("Can't connect server")
     }
 });

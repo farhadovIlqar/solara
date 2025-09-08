@@ -10,20 +10,7 @@
 <body>
     <h1 id="welcome"></h1>
 
-    <script>
-        const welcomeElement = document.getElementById("welcome");
-
-        fetch("/api/user")
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) {
-                    welcomeElement.textContent = `Welcome ${data.email}`;
-                } else {
-                    welcomeElement.textContent = "Welcome guest";
-                }
-            });
-    </script>
-
+    <script src="dashborad.js"></script>
 </body>
 
 </html>

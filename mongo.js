@@ -32,7 +32,16 @@ app.get("/", (req, res) => {
 
 app.post("/signup", async (req, res) => {
     try {
+
         const { mail, password } = req.body;
+
+        const existingUser = await User.findOne({ mail });
+        if (existingUser) {
+            return res.status(400).json({
+                success: false,
+                message: "This mail already exist"
+            });
+        }
 
         const user = new User({
             mail: mail,
@@ -51,7 +60,7 @@ app.post("/login", async (req, res) => {
 
     try {
         const user = await User.findOne({ mail, password });
-        if (!user) return res.status(400).json({ success: false, message: "Email və ya parol səhvdir" });
+        if (!user) return res.status(400).json({ success: false, message: "Invalid email or password" });
 
         req.session.userEmail = user.mail;
 
