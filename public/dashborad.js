@@ -4,7 +4,7 @@ fetch("/api/user")
     .then(res => res.json())
     .then(data => {
         if (data.success) {
-            welcomeElement.textContent = `Welcome ${data.email}`;
+            welcomeElement.textContent = `Hə girdin nə gözlüyürsən`;
         } else {
             welcomeElement.textContent = "Welcome guest";
         }

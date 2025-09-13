@@ -60,7 +60,13 @@ app.post("/login", async (req, res) => {
 
     try {
         const user = await User.findOne({ mail, password });
-        if (!user) return res.status(400).json({ success: false, message: "Invalid email or password" });
+        if (!user) {
+            passwordInput.style.border = "2px solid red"
+            setTimeout(() => {
+                passwordInput.style.border = "2px solid gray"
+            }, 1500)
+            return res.status(400).json({ success: false, message: "Invalid email or password" });
+        }
 
         req.session.userEmail = user.mail;
 
@@ -71,9 +77,26 @@ app.post("/login", async (req, res) => {
     }
 });
 
+app.post("/forget", async (req, res) => {
+    const { mail } = req.body;
+
+    try {
+        const user = await User.findOne({ mail });
+        if (!user) {
+            return res.status(400).json({ success: false, message: "Email not found!" });
+        }
+
+        res.json({ success: true, email: user.mail });
+    } catch (err) {
+        console.error("Login error:", err)
+        res.status(500).json({ success: false, message: err.message });
+    }
+})
+
 app.get("/api/user", (req, res) => {
     if (!req.session.userEmail) return res.json({ success: false });
     res.json({ success: true, email: req.session.userEmail });
 });
 
 app.listen(3001, () => console.log("Server running on http://localhost:3001"));
+

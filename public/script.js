@@ -18,10 +18,13 @@ let main = document.getElementsByTagName('main')[0]
 let pass = document.getElementById('confirm-password-section')
 let sign_btn = document.getElementById('sign-btn')
 let options = document.querySelector('.options')
-let confirmPasswordInput = document.getElementById('confirmPassword');
-let passwordInput = document.getElementById('password');
+let confirmPasswordInput = document.getElementById('confirmPassword')
+let passwordInput = document.getElementById('password')
 let form = document.getElementById('signupForm')
-let emailInput = document.getElementById('email');
+let emailInput = document.getElementById('email')
+let msg = document.getElementById('invalid-msg')
+let msg_mail = document.getElementById('invalid-msg-mail')
+let msg_pass = document.getElementById('invalid-msg-pass')
 
 create.addEventListener('click', () => {
     if (create.textContent == "Create now") {
@@ -35,6 +38,8 @@ create.addEventListener('click', () => {
         emailInput.value = ""
         passwordInput.value = ""
         form.action = "/signup"
+        eye.textContent = "Show password"
+        passwordInput.type = "password"
         console.log(form.action)
     }
     else if (create.textContent == "Sign in") {
@@ -48,6 +53,8 @@ create.addEventListener('click', () => {
         passwordInput.value = ""
         sign_btn.textContent = "Sign in"
         options.style.visibility = "visible"
+        eye.textContent = "Show password"
+        passwordInput.type = "password"
         console.log(form.action)
     }
 })
@@ -61,14 +68,20 @@ form.addEventListener("submit", async function (e) {
     delete data.confirmPassword;
 
     if (form.action.includes("signup") && passwordInput.value !== confirmPasswordInput.value) {
-        alert("Passwords do not match!");
         passwordInput.value = ""
         confirmPasswordInput.value = ""
+        msg.style.display = "block"
+        confirmPasswordInput.style.border = "2px solid red"
+        setTimeout(() => {
+            msg.style.display = "none"
+            confirmPasswordInput.style.border = "2px solid gray"
+        }, 1500)
         return;
     }
 
+
+
     try {
-        console.log(form.action)
         const res = await fetch(form.action, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -77,20 +90,73 @@ form.addEventListener("submit", async function (e) {
 
         const result = await res.json();
 
-        if (result.success) {
-            if (form.action.includes("signup")) {
-                alert("User registered successfully!");
+        if (form.action.includes("signup")) {
+            if (result.success) {
+                console.log("User registered successfully!");
                 this.reset();
-            } else {
-                alert("Login successful!");
-                window.location.href = "/dashboard.html";
+                window.location.reload()
             }
-        } else {
-            alert(result.message || "Error");
-            this.reset()
+            else {
+                console.log(result.message || "Error");
+                msg_mail.textContent = "Email already exists"
+                emailInput.style.border = "2px solid red"
+                msg_mail.style.display = "block"
+                setTimeout(() => {
+                    emailInput.style.border = "2px solid gray"
+                    msg_mail.style.display = "none"
+                }, 1500)
+                this.reset()
+            }
+        }
+
+        if (form.action.includes("forget")) {
+            if (result.success) {
+                emailInput.style.border = "2px solid green"
+                label.textContent = "Password reset link sent successfully! Please check your email."
+                setTimeout(() => {
+                    emailInput.style.border = "2px solid gray"
+                    label.textContent = "Please enter your email address to receive your password reset link."
+                }, 1500)
+                this.reset();
+            }
+            else {
+                console.log("Email not found!");
+                emailInput.style.border = "2px solid red"
+                label.textContent = "Email not found!"
+                setTimeout(() => {
+                    emailInput.style.border = "2px solid gray"
+                    label.textContent = "Please enter your email address to receive your password reset link."
+                }, 1500)
+                this.reset();
+            }
+        }
+
+        if (form.action.includes("login")) {
+            if (result.success) {
+                console.log("User logged in successfully!");
+                this.reset();
+                window.location.href = "/dashboard.html"
+            }
+            else {
+                console.log(result.message || "Error");
+                passwordInput.style.border = "2px solid red"
+                emailInput.style.border = "2px solid red"
+                msg_mail.style.display = "block"
+                msg_pass.style.display = "block"
+                msg_mail.textContent = "Invalid email or password"
+                msg_pass.textContent = "Invalid email or password"  
+                
+                setTimeout(() => {
+                    msg_mail.style.display = "none"
+                    msg_pass.style.display = "none"
+                    passwordInput.style.border = "2px solid gray"
+                    emailInput.style.border = "2px solid gray"
+                }, 1500)
+                this.reset()
+            }
         }
     } catch (err) {
         console.error(err);
-        alert("Can't connect server")
+        console.log("Can't connect server")
     }
 });
